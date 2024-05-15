@@ -1,0 +1,35 @@
+*{
+    font-family: "Rubik Wet Paint";
+}
+body{
+    background-color: rgba(127, 15, 15, 0.489);
+    background-image: url(bg.jpg);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 0 0.8rem;
+}
+
+.box{
+    display: block;
+    margin-top: 80px;
+    margin-left: 400px;
+}
+#main {
+    max-width: 60%;
+    margin: 0 auto;
+    background: linear-gradient(-45deg,#640A27,#00122D,#026992c8);
+    min-height: 80vh;
+    padding: 0.8rem;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px 20px #01151b3a;
+    border-left: 4px solid #ffffff04;
+    border-right: 4px solid #ffffff04;
+    border-radius: 10px;
+}
+h1{
+    font-family: "Rubik Wet Paint";
+    font-weight: 400;
+    font-size: 50px;
+    color: rgb(255, 196, 0);
+  }

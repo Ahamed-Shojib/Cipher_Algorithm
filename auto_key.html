@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autokey Cipher</title>
+  <!-- Bootstrap CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="main" class="container col-lg-6 mx-auto my-4">
+    <h1 class="text-center my-4">Autokey Cipher</h1>
+    <div class="form-group">
+      <input type="text" class="form-control" id="message" placeholder="Enter Plain Text">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" id="key" placeholder="Enter Key">
+    </div>
+    <button type="button" class="btn btn-outline-success" onclick="encrypt()">Encrypt</button>
+    <button type="button" class="btn btn-outline-warning mx-4" onclick="decrypt()">Decrypt</button>
+    <div class="form-group mt-3">
+      <label for="result" class="text-warning">Result:</label>
+      <input type="text" class="form-control " id="result" readonly>
+    </div>
+    <button class="btn btn-outline-info" onclick="copyClipboard()">Copy Clipboard</button>
+    <div class="row">
+        <div class="col-lg-2 mx-auto my-3">
+            <a href="index.html" class="btn btn-outline-danger" type="button">Back</a>
+        </div>
+    </div>
+  </div>
+
+  <script>
+  // Function to encrypt the message using Autokey Cipher
+   function encrypt() {
+    var message = document.getElementById('message').value;
+    var key = document.getElementById('key').value;
+    var result = '';
+    key = key.toUpperCase().replace(/[^A-Z]/g, '');
+    for (var i = 0, j = 0; i < message.length; i++) {
+      var char = message[i].toUpperCase();
+      if (/[A-Z]/.test(char)) {
+        var offset = key.charCodeAt(j % key.length) - 65;
+        var newCharCode = (char.charCodeAt(0) + offset - 65) % 26 + 65;
+        result += String.fromCharCode(newCharCode);
+        if (/[A-Z]/.test(message[i])) {
+          key += message[i].toUpperCase();
+        } else {
+          key += message[i];
+        }
+        j++;
+      } else {
+        result += char;
+      }
+    }
+    document.getElementById('result').value = result;
+  }
+
+  // Function to decrypt the message using Autokey Cipher
+  function decrypt() {
+    var message = document.getElementById('message').value;
+    var key = document.getElementById('key').value;
+    var result = '';
+    key = key.toUpperCase().replace(/[^A-Z]/g, '');
+    for (var i = 0, j = 0; i < message.length; i++) {
+      var char = message[i].toUpperCase();
+      if (/[A-Z]/.test(char)) {
+        var offset = key.charCodeAt(j % key.length) - 65;
+        var newCharCode = (char.charCodeAt(0) - offset - 65 + 26) % 26 + 65;
+        result += String.fromCharCode(newCharCode);
+        key += String.fromCharCode(newCharCode);
+        j++;
+      } else {
+        result += char;
+      }
+    }
+    document.getElementById('result').value = result;
+  }
+  </script>
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
